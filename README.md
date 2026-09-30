@@ -12,6 +12,10 @@ A no-spoiler, inclusive Codex movie companion skill.
 
 When you say "开始观看" or "start watching", it records wall-clock time and movie time. When you ask a question later, it calculates where the movie should be, retrieves only subtitle context before the safe time, and answers like a movie buddy without spoiling later events.
 
+## 截图 / Screenshots
+
+<!-- TODO: add screenshot -->
+
 ## 能做什么 / Features
 
 - 进入放映模式并持续推算当前片内时间
@@ -42,10 +46,6 @@ When you say "开始观看" or "start watching", it records wall-clock time and 
 
 ## 安装 / Installation
 
-> Replace `<owner>/<repo>` with the GitHub repository where this skill is published.
->
-> 把 `<owner>/<repo>` 替换成你发布这个 skill 的 GitHub 仓库名。
-
 ### Option A: Codex `$skill-installer`
 
 Codex's official installer can install a skill from a GitHub repo path. This repository stores the skill at `skills/movie-companion`:
@@ -53,7 +53,7 @@ Codex's official installer can install a skill from a GitHub repo path. This rep
 Codex 官方安装器可以从 GitHub 仓库路径安装 skill。这个仓库把 skill 放在 `skills/movie-companion`：
 
 ```text
-$skill-installer install the movie-companion skill from <owner>/<repo> with path skills/movie-companion
+$skill-installer install the movie-companion skill from yuzhang-zhong/MovieCompanion.skill with path skills/movie-companion
 ```
 
 Equivalent command if you are using the local installer script directly:
@@ -62,7 +62,7 @@ Equivalent command if you are using the local installer script directly:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo <owner>/<repo> \
+  --repo yuzhang-zhong/MovieCompanion.skill \
   --path skills/movie-companion
 ```
 
@@ -77,7 +77,7 @@ The open agent skills ecosystem also supports GitHub installs:
 开放 Agent Skills 生态也支持从 GitHub 安装：
 
 ```bash
-npx skills add <owner>/<repo> --agent codex
+npx skills add yuzhang-zhong/MovieCompanion.skill --agent codex
 ```
 
 If your installer asks for a specific skill, choose `movie-companion`.
@@ -91,7 +91,7 @@ Clone the repository, then run the included installer:
 克隆仓库，然后运行仓库自带安装脚本：
 
 ```bash
-git clone https://github.com/<owner>/<repo>.git movie-companion
+git clone https://github.com/yuzhang-zhong/MovieCompanion.skill.git movie-companion
 cd movie-companion
 bash scripts/install.sh
 ```
@@ -101,7 +101,7 @@ PowerShell version:
 PowerShell 版本：
 
 ```powershell
-git clone https://github.com/<owner>/<repo>.git movie-companion
+git clone https://github.com/yuzhang-zhong/MovieCompanion.skill.git movie-companion
 Set-Location movie-companion
 powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
 ```
@@ -269,6 +269,24 @@ The skill should sound inclusive, accepting, and easy to talk to. Basic question
 
 这个 skill 的语气要包容、接纳、轻松。用户问基础问题、看漏了、没听懂歌词、对角色有不同感受，都应该被正常接住。
 
+## 技术栈 / Tech Stack
+
+- 核心脚本：Python 3（`skills/movie-companion/scripts/movie_sync.py`），只用标准库（`argparse` / `json` / `re` / `dataclasses` / `datetime` / `pathlib` / `typing`），无第三方依赖。
+- 字幕解析：基于正则的 `.srt` / `.vtt` 解析器，把字幕转成统一的 cue 对象（起止时间 + 文本 + 轨道）。
+- 状态存储：JSON 字幕索引（`.movie-index.json`）+ JSON 放映会话文件。
+- 命令行子命令：`index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`。
+- 安装脚本：Bash（`scripts/install.sh`）和 PowerShell（`scripts/install.ps1`），安装到 `~/.codex/skills/movie-companion`。
+- 测试：Python `unittest`（`tests/test_movie_sync.py`）。
+- Skill 打包：Agent Skills 格式（`SKILL.md` frontmatter），面向 Codex。
+
+- Core script: Python 3 (`skills/movie-companion/scripts/movie_sync.py`), standard library only (`argparse` / `json` / `re` / `dataclasses` / `datetime` / `pathlib` / `typing`), no third-party dependencies.
+- Subtitle parsing: regex-based `.srt` / `.vtt` parser that normalizes subtitles into cue objects (start/end time + text + track).
+- State storage: JSON subtitle index (`.movie-index.json`) + JSON watch-session files.
+- CLI subcommands: `index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`.
+- Install scripts: Bash (`scripts/install.sh`) and PowerShell (`scripts/install.ps1`), installing to `~/.codex/skills/movie-companion`.
+- Tests: Python `unittest` (`tests/test_movie_sync.py`).
+- Skill packaging: Agent Skills format (`SKILL.md` frontmatter), targeting Codex.
+
 ## 仓库结构 / Repository Structure
 
 ```text
@@ -296,3 +314,9 @@ The skill should sound inclusive, accepting, and easy to talk to. Basic question
 ├── LICENSE
 └── .gitignore
 ```
+
+## 许可证 / License
+
+本仓库采用 MIT License，版权所有 (c) 2026 Vincent Zhong，详见 [LICENSE](LICENSE)。
+
+This repository is licensed under the MIT License, Copyright (c) 2026 Vincent Zhong. See [LICENSE](LICENSE) for details.
