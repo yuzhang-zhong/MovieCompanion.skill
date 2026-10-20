@@ -1,94 +1,40 @@
-# 电影搭子.skill
-
 <p align="center">
-  <img src="skills/movie-companion/references/logo.png" alt="电影搭子.skill logo" width="180" />
+  <img src="skills/movie-companion/references/logo.png" alt="电影搭子.skill logo" width="156" />
 </p>
+<h1 align="center">电影搭子.skill · MovieCompanion</h1>
+<p align="center"><strong>陪你聊刚刚看见的故事，不抢先讲下一幕。</strong><br>A subtitle-grounded movie companion that follows your playback position.</p>
+<p align="center"><a href="#快速开始">快速开始</a> · <a href="#试跑字幕边界">可复现示例</a> · <a href="#边界与隐私">使用边界</a> · <a href="#english">English</a></p>
 
-一个无剧透、包容接纳的 Codex 电影陪看 skill。
+![字幕、播放时间与安全上下文的工作流示意图，非播放器截图](docs/playback-boundary.svg)
 
-A no-spoiler, inclusive Codex movie companion skill.
+## 它解决什么
 
-你说“开始观看”，它记录当前墙钟时间和片内时间；之后你随时提问，它会先计算电影播放到哪里，再只读取安全时间点之前的字幕上下文来回答。它像一个搭子一样陪你聊电影，但不会提前说后面的剧情。
+看到一半忘了人物关系、没听懂一句对白，或者只是想说一句“这一幕好难受”？电影搭子把**当前播放位置**和**字幕证据**交给 Codex，让讨论停留在你已经看到的范围内，语气轻松、包容，不要求你提供截图。
 
-When you say "开始观看" or "start watching", it records wall-clock time and movie time. When you ask a question later, it calculates where the movie should be, retrieves only subtitle context before the safe time, and answers like a movie buddy without spoiling later events.
+| 你提供 | 脚本负责 | Skill 负责 |
+| --- | --- | --- |
+| 合法取得的 `.srt` / `.vtt` 字幕 | 解析为带起止时间的字幕索引 | 根据可用字幕解释对白、人物和场景 |
+| 开始 / 继续时屏幕上的时间点 | 用墙钟时间与播放速率估算进度 | 每次回答前重新获取上下文 |
+| 可选描述字幕、SDH 或音频描述文本 | 合并对白与描述轨 | 没有视觉证据就明确说不知道 |
 
-## 截图 / Screenshots
+**这是 Codex Skill + Python 辅助脚本，不是播放器插件。** 它不读取播放器内部进度，也不控制视频。默认将回答范围设在估算进度之前 8 秒，以降低字幕提前泄露的风险；这不是绝对无剧透保证。
 
-<!-- TODO: add screenshot -->
+## 快速开始
 
-## 能做什么 / Features
+需要可使用本地 Skills 的 Codex，以及 Python 3。辅助脚本仅使用 Python 标准库。
 
-- 进入放映模式并持续推算当前片内时间
-- 解析 `.srt` / `.vtt` 字幕
-- 支持普通对白字幕和描述字幕、SDH、音频描述字幕
-- 每次回答前自动取最新安全上下文
-- 严格禁止剧透
-- 不要求截图
-- 用包容、接纳、不嘲笑问题的语气陪看
+### 1. 安装
 
-- Enter screening mode and estimate current playback time
-- Parse `.srt` / `.vtt` subtitle files
-- Support dialogue subtitles plus descriptive, SDH, or audio-description tracks
-- Retrieve fresh safe context before every answer
-- Enforce strict no-spoiler boundaries
-- Never require screenshots
-- Keep a welcoming, accepting, non-judgmental companion voice
-
-## 不能做什么 / Limits
-
-- 不能直接读取 Netflix、Disney+ 等 DRM 视频画面
-- 不能凭空知道没有出现在字幕或描述轨里的视觉细节
-- 不会帮你获取盗版资源
-
-- Cannot directly read DRM-protected streaming video
-- Cannot know visual details that are absent from subtitles or descriptive tracks
-- Will not help obtain pirated content
-
-## 安装 / Installation
-
-### Option A: Codex `$skill-installer`
-
-Codex's official installer can install a skill from a GitHub repo path. This repository stores the skill at `skills/movie-companion`:
-
-Codex 官方安装器可以从 GitHub 仓库路径安装 skill。这个仓库把 skill 放在 `skills/movie-companion`：
+在 Codex 中使用 Skill 安装器：
 
 ```text
 $skill-installer install the movie-companion skill from yuzhang-zhong/MovieCompanion.skill with path skills/movie-companion
 ```
 
-Equivalent command if you are using the local installer script directly:
+安装后重启 Codex，使用 `$movie-companion` 调用。
 
-如果你直接使用本地安装脚本，对应命令是：
-
-```bash
-python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo yuzhang-zhong/MovieCompanion.skill \
-  --path skills/movie-companion
-```
-
-Restart Codex after installation.
-
-安装完成后重启 Codex。
-
-### Option B: Skills CLI
-
-The open agent skills ecosystem also supports GitHub installs:
-
-开放 Agent Skills 生态也支持从 GitHub 安装：
-
-```bash
-npx skills add yuzhang-zhong/MovieCompanion.skill --agent codex
-```
-
-If your installer asks for a specific skill, choose `movie-companion`.
-
-如果安装器要求选择具体 skill，请选择 `movie-companion`。
-
-### Option C: Manual Install
-
-Clone the repository, then run the included installer:
-
-克隆仓库，然后运行仓库自带安装脚本：
+<details>
+<summary>也可以手动安装，或使用 Skills CLI</summary>
 
 ```bash
 git clone https://github.com/yuzhang-zhong/MovieCompanion.skill.git movie-companion
@@ -96,224 +42,92 @@ cd movie-companion
 bash scripts/install.sh
 ```
 
-PowerShell version:
+Windows PowerShell：在仓库根目录运行 `powershell -File .\scripts\install.ps1`。脚本默认将 Skill 安装到 `~/.codex/skills/movie-companion`；Bash 脚本也接受目标目录作为第一个参数。
 
-PowerShell 版本：
-
-```powershell
-git clone https://github.com/yuzhang-zhong/MovieCompanion.skill.git movie-companion
-Set-Location movie-companion
-powershell -ExecutionPolicy Bypass -File .\scripts\install.ps1
-```
-
-Validate the install:
-
-验证安装：
+开放 Skills CLI 入口：
 
 ```bash
-ls ~/.codex/skills/movie-companion
-head -n 5 ~/.codex/skills/movie-companion/SKILL.md
+npx skills add yuzhang-zhong/MovieCompanion.skill --agent codex
 ```
 
-After restarting Codex, the display name is:
+如出现选择菜单，选择 `movie-companion`。安装完成后重启 Codex。
+</details>
 
-重启 Codex 后，显示名是：
+### 2. 给出字幕和起点
 
 ```text
-电影搭子.skill
+使用 $movie-companion。我有这部电影的对白字幕 /path/to/movie.srt。
+开始观看 00:17:42。请只聊我已经看到的内容。
 ```
 
-The internal invocation name is:
+之后可以问：“刚才那句是什么意思？”“到这里为止，他们是什么关系？”
 
-内部调用名是：
+### 3. 播放状态变了，就重新同步
 
-```text
-$movie-companion
-```
+| 实际操作 | 告诉搭子 |
+| --- | --- |
+| 暂停影片 | `暂停` |
+| 继续、跳转、回看或调整倍速 | `开始观看 00:28:10`，并说明新的倍速 |
+| 结束本次观看 | `关闭放映模式` |
 
-## 快速开始 / Quick Start
+网络缓冲、字幕版本差异和忘记报暂停都会造成偏差。以播放器实际显示时间为准，不确定时重新同步。
 
-Use your own subtitle paths. The examples below use placeholder filenames.
+## 试跑字幕边界
 
-请替换成你自己的字幕路径。下面都是通用占位示例。
-
-Create a subtitle index:
-
-生成字幕索引：
+仓库自带[三条虚构对白](skills/movie-companion/examples/sample-dialogue.srt)，不需要电影文件、API key 或第三方包。以下命令从仓库根目录运行：
 
 ```bash
 python skills/movie-companion/scripts/movie_sync.py index \
-  --subtitle /path/to/movie-dialogue.srt \
-  --description /path/to/movie-description.srt \
-  --movie "Movie Title" \
-  --output /path/to/movie.movie-index.json
-```
+  --subtitle skills/movie-companion/examples/sample-dialogue.srt \
+  --movie "Sample dialogue" --output .movie-companion/sample-index.json
 
-If you only have dialogue subtitles, omit `--description`:
-
-如果只有普通对白字幕，可以省略 `--description`：
-
-```bash
-python skills/movie-companion/scripts/movie_sync.py index \
-  --subtitle /path/to/movie-dialogue.srt \
-  --movie "Movie Title" \
-  --output /path/to/movie.movie-index.json
-```
-
-Start screening mode:
-
-开始放映：
-
-```bash
 python skills/movie-companion/scripts/movie_sync.py start \
-  --index /path/to/movie.movie-index.json \
-  --at 00:00:00 \
-  --session /path/to/movie.watch-session.json
-```
+  --index .movie-companion/sample-index.json --at 00:00:20 \
+  --rate 0 --session .movie-companion/sample-session.json
 
-Get the spoiler-safe context bundle before answering:
-
-提问前获取无剧透安全上下文：
-
-```bash
 python skills/movie-companion/scripts/movie_sync.py ask \
-  --session /path/to/movie.watch-session.json \
-  --before 900
+  --session .movie-companion/sample-session.json --before 900
 ```
 
-PowerShell users can use the same commands on one line, or replace `\` with PowerShell backticks.
+`--rate 0` 仅用于把这个演示固定在 20 秒；正常观看使用默认速率 `1`。返回结果的关键部分：
 
-PowerShell 用户可以写成一行，或把 `\` 换成 PowerShell 的反引号。
+```json
+{
+  "estimated_time": "00:00:20.000",
+  "safe_time": "00:00:12.000",
+  "future_window_seconds": 0.0,
+  "cues": [
+    {"start": 1.0, "end": 3.0, "text": "The door is locked.", "track": "dialogue"},
+    {"start": 8.0, "end": 10.0, "text": "I heard something upstairs.", "track": "dialogue"}
+  ]
+}
+```
 
-Pause, close, or inspect a session:
+这是实际脚本输出的节选。30–32 秒的第三条对白未进入上下文。日常陪看应使用 `ask`；底层 `context --after` 是调试能力，不应开启未来窗口。
 
-暂停、关闭或查看会话状态：
+## 边界与隐私
+
+- **不是视频理解器。** 不直接读取 Netflix、Disney+ 等 DRM 画面；普通对白字幕无法说明所有动作和视觉细节。
+- **不是零剧透承诺。** 字幕过滤是确定性的，但时间偏差、错误字幕和模型不遵守指令仍可能产生风险。Skill 要求只使用返回的安全上下文，不借用模型已知结局。
+- **只用有权访问的内容。** 不协助获取盗版影片。描述轨越完整，可解释的场景信息越多。
+- **本地文件不是无痕。** 辅助脚本将字幕索引、源文件路径和观看会话写成本地 JSON；交给 Codex 的上下文仍受你所用客户端的处理方式约束。
+
+## 开发与文档
 
 ```bash
-python skills/movie-companion/scripts/movie_sync.py pause --session /path/to/movie.watch-session.json
-python skills/movie-companion/scripts/movie_sync.py close --session /path/to/movie.watch-session.json
-python skills/movie-companion/scripts/movie_sync.py status --session /path/to/movie.watch-session.json
+python -m unittest discover -s tests
 ```
 
-## GPT 推荐的 5 个字幕搜集网页 / 5 Subtitle Sites Recommended by GPT
+- [Skill 行为契约](skills/movie-companion/SKILL.md)：同步流程、陪伴语气和字幕来源说明
+- [架构与状态机](skills/movie-companion/references/architecture.md)：索引、会话与时间边界
+- [中文设计说明](搭子说明.md)
+- [核心 CLI](skills/movie-companion/scripts/movie_sync.py)：`index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`
 
-请只为你已经合法观看或拥有访问权的影视内容寻找匹配字幕。字幕站点的可用性、域名和内容质量会变化，下载前自己判断来源和安全性。
+## English
 
-Use these only to find matching subtitles for movies or shows you can legally watch or access. Availability, domains, and subtitle quality can change; use your own judgment before downloading files.
+MovieCompanion combines a Codex Skill with a dependency-free Python subtitle tool. Supply your own lawful SRT/VTT files and the visible playback timestamp. Before each answer, the tool estimates progress and returns only cues ending at or before `safe_time` (estimated playback minus an 8-second default lag).
 
-| 网站 / Site | 链接 / Link | 适合什么 / Best For |
-| --- | --- | --- |
-| OpenSubtitles | [dl.opensubtitles.com](https://dl.opensubtitles.com/en/home) | 电影/剧集/多语言最大众，英文和中文都能找。 / A large mainstream subtitle source for movies, shows, and many languages, including English and Chinese. |
-| SubDL | [subdl.com](https://subdl.com/) | 很适合找电影、剧集、多语言字幕，界面比较清爽。 / Good for movies, shows, and multilingual subtitles with a clean interface. |
-| Zimuku / 字幕库 | [zimuku.org](https://zimuku.org/)；备用 / mirror: [zmk.pw](https://zmk.pw/) | 中文/中英双语字幕常用。 / Commonly used for Chinese and bilingual Chinese-English subtitles. |
-| SubHD | [subhd.tv](https://subhd.tv/) | 中文圈常用，适合中英双语字幕；页面也列了备用域名：`subhdtw.com`、`subhd.la`、`subhd.cc`、`subhd.me`。 / Popular in Chinese subtitle communities, especially for bilingual Chinese-English subtitles; it also lists backup domains. |
-| Addic7ed | [addic7ed.com](https://www.addic7ed.com/) | 英文剧集字幕很强，尤其美剧/英剧。 / Strong for English TV subtitles, especially US and UK series. |
-
-If you can find SDH, closed captions, descriptive subtitles, or audio-description transcripts, this skill gets better scene context. Regular dialogue subtitles still work, but visual details will be handled more cautiously.
-
-如果能找到 SDH、closed captions、descriptive subtitles 或 audio-description transcript，这个 skill 会更懂场面；只有普通字幕也可以，只是视觉细节会更谨慎。
-
-## 放映模式口令 / Screening Mode Commands
-
-You can say:
-
-你可以这样说：
-
-```text
-开始观看
-```
-
-If you are not starting from the beginning:
-
-如果不是从头开始：
-
-```text
-开始观看 00:17:42
-```
-
-Pause or close:
-
-暂停或关闭：
-
-```text
-暂停
-关闭放映模式
-```
-
-Resume with a visible timestamp:
-
-继续时重新给一个可见时间点：
-
-```text
-开始观看 00:28:10
-```
-
-## 无剧透规则 / No-Spoiler Rule
-
-Default safe time:
-
-默认安全时间是：
-
-```text
-estimated movie time - 8 seconds
-当前估算片内时间 - 8 秒
-```
-
-Answers can only use subtitles and descriptive tracks before the safe time. Even if the model knows the ending, it must not bring later information into the answer.
-
-回答只能使用安全时间之前的字幕和描述轨。即使模型知道电影结局，也不能把后面的信息带进来。
-
-## 搭子语气 / Companion Voice
-
-The skill should sound inclusive, accepting, and easy to talk to. Basic questions, missed details, confused reactions, emotional responses, or unusual interpretations are all welcome.
-
-这个 skill 的语气要包容、接纳、轻松。用户问基础问题、看漏了、没听懂歌词、对角色有不同感受，都应该被正常接住。
-
-## 技术栈 / Tech Stack
-
-- 核心脚本：Python 3（`skills/movie-companion/scripts/movie_sync.py`），只用标准库（`argparse` / `json` / `re` / `dataclasses` / `datetime` / `pathlib` / `typing`），无第三方依赖。
-- 字幕解析：基于正则的 `.srt` / `.vtt` 解析器，把字幕转成统一的 cue 对象（起止时间 + 文本 + 轨道）。
-- 状态存储：JSON 字幕索引（`.movie-index.json`）+ JSON 放映会话文件。
-- 命令行子命令：`index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`。
-- 安装脚本：Bash（`scripts/install.sh`）和 PowerShell（`scripts/install.ps1`），安装到 `~/.codex/skills/movie-companion`。
-- 测试：Python `unittest`（`tests/test_movie_sync.py`）。
-- Skill 打包：Agent Skills 格式（`SKILL.md` frontmatter），面向 Codex。
-
-- Core script: Python 3 (`skills/movie-companion/scripts/movie_sync.py`), standard library only (`argparse` / `json` / `re` / `dataclasses` / `datetime` / `pathlib` / `typing`), no third-party dependencies.
-- Subtitle parsing: regex-based `.srt` / `.vtt` parser that normalizes subtitles into cue objects (start/end time + text + track).
-- State storage: JSON subtitle index (`.movie-index.json`) + JSON watch-session files.
-- CLI subcommands: `index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`.
-- Install scripts: Bash (`scripts/install.sh`) and PowerShell (`scripts/install.ps1`), installing to `~/.codex/skills/movie-companion`.
-- Tests: Python `unittest` (`tests/test_movie_sync.py`).
-- Skill packaging: Agent Skills format (`SKILL.md` frontmatter), targeting Codex.
-
-## 仓库结构 / Repository Structure
-
-```text
-.
-├── skills/
-│   └── movie-companion/
-│       ├── SKILL.md
-│       ├── agents/
-│       │   └── openai.yaml
-│       ├── references/
-│       │   ├── architecture.md
-│       │   └── logo.png
-│       ├── scripts/
-│       │   ├── __init__.py
-│       │   └── movie_sync.py
-│       └── examples/
-│           └── sample-dialogue.srt
-├── scripts/
-│   ├── install.ps1
-│   └── install.sh
-├── tests/
-│   └── test_movie_sync.py
-├── README.md
-├── 搭子说明.md
-├── LICENSE
-└── .gitignore
-```
+Install using the command above, restart Codex, then ask `$movie-companion` to start at your current timestamp. Resync after pausing, seeking, buffering, or changing speed. The included synthetic demo fixes playback at 20 seconds and returns only the first two cues. It illustrates the filtering rule, not a guarantee against model-generated spoilers. No direct video access, screenshots, or DRM bypass is provided.
 
 ## 许可证 / License
 
