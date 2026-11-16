@@ -1,9 +1,20 @@
-<p align="center">
-  <img src="skills/movie-companion/references/logo.png" alt="电影搭子.skill logo" width="156" />
-</p>
-<h1 align="center">电影搭子.skill · MovieCompanion</h1>
-<p align="center"><strong>陪你聊刚刚看见的故事，不抢先讲下一幕。</strong><br>A subtitle-grounded movie companion that follows your playback position.</p>
-<p align="center"><a href="#快速开始">快速开始</a> · <a href="#试跑字幕边界">可复现示例</a> · <a href="#边界与隐私">使用边界</a> · <a href="#english">English</a></p>
+<div align="center">
+
+<img src="skills/movie-companion/references/logo.png" alt="电影搭子.skill logo" width="156" />
+
+# 电影搭子.skill · MovieCompanion
+
+**陪你聊刚刚看见的故事，不抢先讲下一幕。**
+
+A subtitle-grounded movie companion that follows your playback position.
+
+[![Codex Skill](https://img.shields.io/badge/Agent-Codex_Skill-2563eb)](skills/movie-companion/SKILL.md)
+[![Python](https://img.shields.io/badge/字幕工具-Python_标准库-3776AB)](skills/movie-companion/scripts/movie_sync.py)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+[快速开始](#快速开始) · [可复现示例](#试跑字幕边界) · [边界与隐私](#边界与隐私) · [开发与文档](#开发与文档) · [English](#english)
+
+</div>
 
 ![字幕、播放时间与安全上下文的工作流示意图，非播放器截图](docs/playback-boundary.svg)
 
