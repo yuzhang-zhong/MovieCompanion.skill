@@ -4,6 +4,8 @@
 
 # 电影搭子.skill · MovieCompanion
 
+**简体中文** · [English (full README)](README.en.md)
+
 **陪你聊刚刚看见的故事，不抢先讲下一幕。**
 
 A subtitle-grounded movie companion that follows your playback position.
