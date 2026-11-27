@@ -1,0 +1,29 @@
+{
+  "name": "movie-companion",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "No-spoiler AI movie watch-along buddy Skill and Python SRT/VTT subtitle timestamp-sync helper that chats about characters, lines, and plot without spoiling scenes you haven't watched yet.",
+  "repository": "github:yuzhang-zhong/MovieCompanion.skill",
+  "keywords": [
+    "agent-skill",
+    "agent-skills",
+    "claude-skill",
+    "codex-skill",
+    "copilot-skill",
+    "movie",
+    "watch-along",
+    "watch-buddy",
+    "spoiler-free",
+    "no-spoiler",
+    "subtitles",
+    "srt",
+    "vtt",
+    "timestamp-sync"
+  ],
+  "pi": {
+    "skills": [
+      "./skills/movie-companion"
+    ]
+  }
+}

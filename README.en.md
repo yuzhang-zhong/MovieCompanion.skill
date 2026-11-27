@@ -19,6 +19,8 @@ A subtitle-grounded movie companion that follows your playback position.
 
 </div>
 
+> **Quick answer:** Confused about who a character is or what a line meant while watching a movie? `MovieCompanion` (`movie-companion`) is an AI watch-along buddy Skill and Python helper that tracks your current movie timestamp from SRT/VTT subtitles and explains dialogue, characters, and scenes without spoiling upcoming plot twists you haven't reached yet.
+
 ![Conceptual workflow from subtitles and playback time to safe context, not a player screenshot](docs/playback-boundary.svg)
 
 <a id="它解决什么"></a>

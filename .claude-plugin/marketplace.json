@@ -1,10 +1,31 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "movie-companion",
+  "owner": {
+    "name": "yuzhang-zhong",
+    "url": "https://github.com/yuzhang-zhong"
+  },
+  "description": "Install movie-companion as a Claude plugin.",
   "plugins": [
     {
       "name": "movie-companion",
-      "description": "Spoiler-free live movie watch-along Agent Skill and SRT/VTT subtitle timestamp sync CLI that discusses plot, dialogue, and characters strictly up to your current playback position.",
-      "version": "1.0.0",
-      "path": "../skills/movie-companion"
+      "source": "./",
+      "description": "No-spoiler AI movie watch-along buddy Skill and Python subtitle timestamp-sync helper that explains characters and dialogue strictly up to your current playback position without spoiling upcoming scenes.",
+      "homepage": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+      "repository": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+      "keywords": [
+        "agent-skill",
+        "movie",
+        "watch-along",
+        "spoiler-free",
+        "no-spoiler",
+        "subtitles",
+        "srt",
+        "vtt",
+        "playback-sync",
+        "film-companion"
+      ],
+      "license": "MIT"
     }
   ]
 }

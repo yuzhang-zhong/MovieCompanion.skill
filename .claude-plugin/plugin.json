@@ -1,8 +1,27 @@
 {
   "name": "movie-companion",
   "version": "1.0.0",
-  "description": "Spoiler-free live movie watch-along Agent Skill and SRT/VTT subtitle timestamp sync CLI that discusses plot, dialogue, and characters strictly up to your current playback position.",
-  "author": "yuzhang-zhong",
-  "license": "MIT",
-  "skills": ["../skills/movie-companion/SKILL.md"]
+  "description": "No-spoiler AI movie watch-along buddy Skill and Python subtitle timestamp-sync helper that explains characters and dialogue strictly up to your current playback position without spoiling upcoming scenes.",
+  "author": {
+    "name": "yuzhang-zhong",
+    "url": "https://github.com/yuzhang-zhong"
+  },
+  "homepage": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+  "repository": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+  "keywords": [
+    "agent-skill",
+    "movie",
+    "watch-along",
+    "spoiler-free",
+    "no-spoiler",
+    "subtitles",
+    "srt",
+    "vtt",
+    "playback-sync",
+    "film-companion"
+  ],
+  "skills": [
+    "./skills/movie-companion"
+  ],
+  "license": "MIT"
 }
