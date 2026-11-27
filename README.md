@@ -19,7 +19,7 @@ A spoiler-free (no-spoiler) live movie watch-along Agent Skill and Python SRT/VT
 
 </div>
 
-> **一句话速览 / Quick answer：** 看电影脸盲认不清人物、没听懂台词，想边看边问 AI 又怕剧透？`movie-companion`（电影搭子）能跟着你当前的电影播放进度读取字幕（SRT / VTT），只聊你已经看到的情节，严格不剧透（防剧透 / 无剧透）后面没演到的剧情。 / Confused about who a character is or what a line meant while watching a movie? `movie-companion` is an AI watch-along buddy Skill and Python helper that tracks your current movie timestamp from subtitles and explains scenes without spoiling upcoming plot twists.
+> **一句话速览 / Quick answer：** 看电影脸盲认不清人物、没听懂台词，想边看边问 AI 又怕剧透？`movie-companion`（电影搭子）是**零依赖**（Python 标准库）字幕同步工具与 AI 陪看技能：按你报的播放时间点与**时间戳**（默认留 8 秒缓冲）截断 `.srt` / `.vtt` 字幕，只聊你已经看到的情节，从源头严格不剧透（防剧透 / 无剧透）。 / Confused about who a character is or what a line meant mid-movie? `movie-companion` is a spoiler-free AI movie watch-along companion Skill and Python helper (**zero dependencies**, standard library only) that filters `.srt`/`.vtt` subtitles up to your current playback timestamp with an 8-second **safety lag** so future lines never enter the prompt.
 
 ![字幕、播放时间与安全上下文的工作流示意图，非播放器截图](docs/playback-boundary.svg)
 
