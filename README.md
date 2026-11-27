@@ -8,7 +8,8 @@
 
 **陪你聊刚刚看见的故事，不抢先讲下一幕。**
 
-A subtitle-grounded movie companion that follows your playback position.
+边看电影边聊剧情、严格根据 SRT / VTT 字幕播放时间轴防剧透（无剧透）的 AI 陪看电影搭子 Agent Skill 与 Python 同步脚本。<br>
+A spoiler-free (no-spoiler) live movie watch-along Agent Skill and Python SRT/VTT subtitle sync script that tracks your current playback timestamp and discusses dialogue, characters, and plot strictly up to the scene you have watched.
 
 [![Codex Skill](https://img.shields.io/badge/Agent-Codex_Skill-2563eb)](skills/movie-companion/SKILL.md)
 [![Python](https://img.shields.io/badge/字幕工具-Python_标准库-3776AB)](skills/movie-companion/scripts/movie_sync.py)
