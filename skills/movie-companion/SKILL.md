@@ -1,6 +1,6 @@
 ---
 name: movie-companion
-description: No-spoiler live movie watch companion / 无剧透实时电影搭子 for synced film discussion. Use when the user wants Codex to watch along with a movie, track playback time from a start timestamp, parse SRT/VTT subtitles, use dialogue subtitles plus descriptive subtitle or audio-description tracks, discuss plot only up to the current safe time, explain scenes, characters, dialogue, visual details, or themes without spoilers, or answer questions during a film without screenshots. 适用于用户想边看电影边提问、需要按当前时间点同步字幕上下文、解释剧情/人物/对白/场面但绝对不剧透的场景。
+description: "No-spoiler live movie watch-along companion / 无剧透实时电影搭子 for timestamp-synced film and TV discussion. Use when the user wants an AI agent (Codex, Claude Code, GitHub Copilot, Cursor) to watch along with a movie or episode, track playback progress from a start timestamp, parse SRT/VTT dialogue and audio-description subtitles, and discuss plot, characters, dialogue, or themes strictly up to the viewer's current safe playback time without spoilers or screenshots. 适用于边看电影电视剧边提问、按播放时间轴同步SRT/VTT字幕、解释剧情人物伏笔对白且严格防剧透的陪看场景。"
 ---
 
 # 电影搭子.skill

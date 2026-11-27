@@ -1,0 +1,6 @@
+{
+  "name": "movie-companion",
+  "version": "1.0.0",
+  "description": "Spoiler-free live movie watch-along Agent Skill and SRT/VTT subtitle timestamp sync CLI that discusses plot, dialogue, and characters strictly up to your current playback position.",
+  "skills": ["../skills/movie-companion/SKILL.md"]
+}
