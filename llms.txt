@@ -25,3 +25,6 @@ npx skills add https://github.com/yuzhang-zhong/MovieCompanion.skill --skill mov
 - [Agent Skill Entry](skills/movie-companion/SKILL.md)
 - [Subtitle Sync CLI](skills/movie-companion/scripts/movie_sync.py)
 - [README (简体中文)](README.md) · [README (English)](README.en.md)
+
+## Multi-Angle Search & Slang Mapping
+- **Pain-Point / Slang**: Googling an actor/character mid-thriller and getting the killer/ending spoiled (`看悬疑片脸盲搜百科被剧透凶手大结局`); watching raw foreign films (`生肉外语片台词典故解释`); `赛博观影搭子` / `电子榨菜防剧透陪看`.
