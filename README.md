@@ -139,6 +139,12 @@ python -m unittest discover -s tests
 - [中文设计说明](搭子说明.md)
 - [核心 CLI](skills/movie-companion/scripts/movie_sync.py)：`index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`
 
+## 常见问题 · FAQ
+
+- **直接问 ChatGPT / Claude 剧情和用「电影搭子」有什么区别？** 直接问大模型很容易顺嘴剧透结局或张冠李戴；电影搭子先用本地 Python 脚本按你当前的播放时间点（默认再留 8 秒缓冲）截断 `.srt` / `.vtt` 字幕，只把你已经看过的台词送入上下文，从源头减少剧透。
+- **Does it read my video player automatically or require `pip` packages?** It uses only the Python 3 standard library (no `pip install`) and works with any player—you simply tell the agent your starting timestamp (e.g., `00:17:42`) and resync when you pause or seek.
+- **How do I install it in Claude Code, Codex, Copilot, or Cursor?** Run `gh skill install yuzhang-zhong/MovieCompanion.skill movie-companion` or `npx skills add yuzhang-zhong/MovieCompanion.skill`.
+
 ## English
 
 MovieCompanion combines a Codex Skill with a dependency-free Python subtitle tool. Supply your own lawful SRT/VTT files and the visible playback timestamp. Before each answer, the tool estimates progress and returns only cues ending at or before `safe_time` (estimated playback minus an 8-second default lag).

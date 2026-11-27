@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use or reference this project, please cite it using the metadata below."
+type: software
+title: "MovieCompanion (电影搭子.skill): Spoiler-Free Subtitle-Synced Movie Watch-Along Agent Skill"
+authors:
+  - family-names: "Zhong"
+    given-names: "Vincent"
+repository-code: "https://github.com/yuzhang-zhong/MovieCompanion.skill"
+url: "https://github.com/yuzhang-zhong/MovieCompanion.skill"
+license: "MIT"
+abstract: "Installable Agent Skill (movie-companion) and zero-dependency Python 3 SRT/VTT subtitle timestamp-sync CLI that tracks a viewer's current playback position with an 8-second safety lag so AI agents can discuss characters, dialogue, and scenes without spoiling upcoming plot points."
+keywords:
+  - "agent-skill"
+  - "movie"
+  - "watch-along"
+  - "watch-party"
+  - "spoiler-free"
+  - "no-spoiler"
+  - "subtitles"
+  - "srt"
+  - "vtt"
+  - "playback-sync"
+  - "ai-companion"
