@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "movie-companion",
+  "description": "Spoiler-free movie watch-along Agent Skill and zero-dependency Python SRT/VTT subtitle timestamp-sync helper with an 8-second safety buffer.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Yuzhang Zhong",
+    "url": "https://github.com/yuzhang-zhong"
+  },
+  "homepage": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+  "repository": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
+  "license": "MIT",
+  "keywords": [
+    "movie",
+    "watch-along",
+    "spoiler-free",
+    "no-spoiler",
+    "subtitles",
+    "srt",
+    "vtt",
+    "playback-sync",
+    "film-companion"
+  ]
+}
