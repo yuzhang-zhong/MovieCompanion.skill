@@ -11,14 +11,21 @@
   "repository": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
   "license": "MIT",
   "keywords": [
-    "movie",
-    "watch-along",
+    "agent-skills",
+    "agent-skill",
+    "claude-skill",
+    "copilot-skill",
+    "codex-skill",
+    "cursor-skill",
+    "movie-companion",
     "spoiler-free",
-    "no-spoiler",
     "subtitles",
     "srt",
-    "vtt",
-    "playback-sync",
-    "film-companion"
+    "webvtt",
+    "watch-along",
+    "film-analysis",
+    "tv-series",
+    "audio-description",
+    "python-cli"
   ]
 }

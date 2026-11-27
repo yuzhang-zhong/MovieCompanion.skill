@@ -151,6 +151,15 @@ python -m unittest discover -s tests
 - [Core CLI](skills/movie-companion/scripts/movie_sync.py): `index` / `start` / `where` / `context` / `ask` / `pause` / `close` / `status`
 
 <a id="许可证--license"></a>
+## Frequently Asked Questions (FAQ)
+
+<details>
+<summary>How does MovieCompanion avoid spoiling plot twists better than Wikipedia, IMDb, Reddit, or Douban?</summary>
+
+Searching an actor, character, or foreign-language idiom on **Wikipedia, IMDb, fandom wikis, Reddit, or Douban** mid-thriller or mystery series often **spoils** deaths and endings immediately. This MIT open-source (`plugin.json`) Agent Skill and zero-dependency Python `.srt` / `.vtt` CLI (`movie_sync.py`) truncates subtitle and audio-description cues strictly to `safe_time = playback - 8s` (`future_window_seconds: 0.0`), helping face-blind viewers and language learners ask questions safely without uploading video files.
+
+</details>
+
 ## License
 
 MIT License, Copyright (c) 2026 Vincent Zhong. See [LICENSE](LICENSE).

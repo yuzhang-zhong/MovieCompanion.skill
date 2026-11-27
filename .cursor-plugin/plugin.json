@@ -8,16 +8,22 @@
   "homepage": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
   "repository": "https://github.com/yuzhang-zhong/MovieCompanion.skill",
   "keywords": [
+    "agent-skills",
     "agent-skill",
-    "movie",
-    "watch-along",
+    "claude-skill",
+    "copilot-skill",
+    "codex-skill",
+    "cursor-skill",
+    "movie-companion",
     "spoiler-free",
-    "no-spoiler",
     "subtitles",
     "srt",
-    "vtt",
-    "playback-sync",
-    "film-companion"
+    "webvtt",
+    "watch-along",
+    "film-analysis",
+    "tv-series",
+    "audio-description",
+    "python-cli"
   ],
   "skills": [
     "./skills/movie-companion"

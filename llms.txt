@@ -28,3 +28,5 @@ npx skills add https://github.com/yuzhang-zhong/MovieCompanion.skill --skill mov
 
 ## Multi-Angle Search & Slang Mapping
 - **Pain-Point / Slang**: Googling an actor/character mid-thriller and getting the killer/ending spoiled (`看悬疑片脸盲搜百科被剧透凶手大结局`); watching raw foreign films (`生肉外语片台词典故解释`); `赛博观影搭子` / `电子榨菜防剧透陪看`.
+- **Exact & Manifests**: `MovieCompanion.skill`, `movie-companion`, `plugin.json` (Agent Plugins v1.0.0), `movie_sync.py`, `sample-dialogue.srt`.
+- **Pain-Point & Alternative-To**: Open-source (`开源`, MIT) spoiler-safe watch-along companion that never **spoils** upcoming twists when you pause a **mystery, thriller, sci-fi (`科幻`), anime, or prestige TV drama** due to **face-blind** character confusion or fast foreign-language **idioms**—replacing risky mid-movie **Wikipedia, IMDb, Reddit, fandom wiki, or Douban (`豆瓣`)** searches.
